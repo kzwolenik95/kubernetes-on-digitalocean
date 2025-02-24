@@ -17,7 +17,8 @@ kind: Ingress
 metadata:
   name: game-2048-ingress
   annotations:
-    konghq.com/rewrite: "$1"
+    konghq.com/rewrite: "/$1"
+    konghq.com/strip-path: "true"
 spec:
   ingressClassName: kong
   rules:
