@@ -28,8 +28,8 @@ spec:
                 name: game-2048
                 port:
                   number: 80
-              annotations:
-                konghq.com/strip-path: "true"
+            annotations:
+              konghq.com/strip-path: "true"
           - path: /lib
             pathType: ImplementationSpecific
             backend:
