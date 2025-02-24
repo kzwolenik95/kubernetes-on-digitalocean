@@ -16,9 +16,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: game-2048-ingress
-  annotations:
-    # konghq.com/rewrite: "/$1"
-    konghq.com/strip-path: "true"
 spec:
   ingressClassName: kong
   rules:
@@ -31,7 +28,9 @@ spec:
                 name: game-2048
                 port:
                   number: 80
-          - path: /game-2048/lib
+              annotations:
+                konghq.com/strip-path: "true"
+          - path: /lib
             pathType: ImplementationSpecific
             backend:
               service:
