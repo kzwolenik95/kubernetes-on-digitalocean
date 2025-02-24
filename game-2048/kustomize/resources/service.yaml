@@ -17,13 +17,13 @@ kind: Ingress
 metadata:
   name: game-2048-ingress
   annotations:
-    konghq.com/strip-path: "true"
+    konghq.com/rewrite: "/$2"
 spec:
   ingressClassName: kong
   rules:
     - http:
         paths:
-          - path: /game-2048
+          - path: /game-2048/(.*)
             pathType: ImplementationSpecific
             backend:
               service:
