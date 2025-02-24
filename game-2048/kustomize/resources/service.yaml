@@ -17,14 +17,21 @@ kind: Ingress
 metadata:
   name: game-2048-ingress
   annotations:
-    konghq.com/rewrite: "/$1"
+    # konghq.com/rewrite: "/$1"
     konghq.com/strip-path: "true"
 spec:
   ingressClassName: kong
   rules:
     - http:
         paths:
-          - path: /~/game-2048/(.*)
+          - path: /game-2048
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: game-2048
+                port:
+                  number: 80
+          - path: /game-2048/lib
             pathType: ImplementationSpecific
             backend:
               service:
