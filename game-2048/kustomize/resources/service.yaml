@@ -23,7 +23,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /game-2048/(.*)
+          - path: /~/game-2048/(.*)
             pathType: ImplementationSpecific
             backend:
               service:
