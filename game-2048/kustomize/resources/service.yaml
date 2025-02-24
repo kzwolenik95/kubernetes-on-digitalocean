@@ -3,10 +3,28 @@ kind: Service
 metadata:
   name: game-2048
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - name: http
       port: 80
       targetPort: 8080
   selector:
     app: game-2048
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: game-2048-ingress
+spec:
+  ingressClassName: kong
+  rules:
+    - http:
+        paths:
+          - path: /game-2048
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: game-2048
+                port:
+                  number: 80
