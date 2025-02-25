@@ -33,3 +33,7 @@ spec:
                 name: game-2048
                 port:
                   number: 80
+    tls:
+    - hosts:
+      - kzwolenik.com
+      secretName: game-2048-ingress-cert
