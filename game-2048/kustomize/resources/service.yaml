@@ -23,25 +23,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /game-2048
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: game-2048
-                port:
-                  number: 80
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: game-2048-ingress-lib
-spec:
-  ingressClassName: kong
-  rules:
-    - http:
-        paths:
-          - path: /lib
+          - path: /
             pathType: ImplementationSpecific
             backend:
               service:
