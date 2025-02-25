@@ -19,6 +19,7 @@ metadata:
   annotations:
     konghq.com/strip-path: "true"
     external-dns.alpha.kubernetes.io/hostname: kzwolenik.com
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   ingressClassName: kong
   rules:
