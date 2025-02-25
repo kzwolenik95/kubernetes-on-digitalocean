@@ -19,7 +19,7 @@ metadata:
   annotations:
     konghq.com/strip-path: "true"
     external-dns.alpha.kubernetes.io/hostname: kzwolenik.com
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    # cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   ingressClassName: kong
   rules:
@@ -33,7 +33,7 @@ spec:
                 name: game-2048
                 port:
                   number: 80
-  tls:
-    - hosts:
-        - kzwolenik.com
-      secretName: game-2048-ingress-cert
+  # tls:
+  #   - hosts:
+  #       - kzwolenik.com
+  #     secretName: game-2048-ingress-cert
