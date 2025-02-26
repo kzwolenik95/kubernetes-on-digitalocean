@@ -3,12 +3,6 @@ resource "flux_bootstrap_git" "this" {
   path               = "clusters/my-cluster"
 }
 
-resource "kubernetes_namespace" "game_2048" {
-  metadata {
-    name = "game-2048"
-  }
-}
-
 resource "kubernetes_manifest" "flux_kustomization_game_2048" {
   manifest = {
     apiVersion = "kustomize.toolkit.fluxcd.io/v1"
@@ -43,7 +37,7 @@ resource "kubernetes_manifest" "flux_kustomization_emojivoto" {
     kind       = "Kustomization"
     metadata = {
       name      = "emojivoto"
-      namespace = "emojivoto"
+      namespace = "flux-system"
     }
     spec = {
       interval        = "10m"
