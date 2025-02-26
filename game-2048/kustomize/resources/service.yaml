@@ -17,11 +17,11 @@ kind: Ingress
 metadata:
   name: game-2048-ingress
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: kzwolenik.com
+    external-dns.alpha.kubernetes.io/hostname: game-2048.kzwolenik.com
 spec:
   ingressClassName: kong
   rules:
-    - host: kzwolenik.com
+    - host: game-2048.kzwolenik.com
       http:
         paths:
           - path: /
