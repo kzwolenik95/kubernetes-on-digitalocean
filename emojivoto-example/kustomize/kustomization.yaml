@@ -12,6 +12,7 @@ commonAnnotations:
 # Emojivoto resources (namespace, services, deployments, etc)
 resources:
   - github.com/BuoyantIO/emojivoto/kustomize/deployment
+  - resources/ingress.yaml
 
 patches:
   - path: patches/emoji-svc.yaml

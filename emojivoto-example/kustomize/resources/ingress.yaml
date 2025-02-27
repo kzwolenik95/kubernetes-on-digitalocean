@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: emojivoto-ingress
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: emojivoto.kzwolenik.com
+spec:
+  ingressClassName: kong
+  rules:
+    - host: emojivoto.kzwolenik.com
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: web-svc
+                port:
+                  number: 80
