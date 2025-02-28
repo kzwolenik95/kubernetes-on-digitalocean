@@ -3,3 +3,12 @@ kind: Kustomization
 
 resources:
   - ../base
+  - resources/ingress.yaml
+
+patches:
+  - path: patches/grafana-config-patch.yaml
+    target:
+      version: v1
+      kind: Secret
+      name: grafana-config
+      namespace: monitoring

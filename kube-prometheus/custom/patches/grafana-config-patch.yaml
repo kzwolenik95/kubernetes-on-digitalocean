@@ -1,0 +1,7 @@
+- op: replace
+  path: /stringData/grafana.ini
+  value: |
+    [date_formats]
+    default_timezone = UTC
+    [server]
+    root_url = https://grafana.kzwolenik.com/
