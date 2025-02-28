@@ -12,8 +12,7 @@ resource "kubernetes_manifest" "flux_kustomization_game_2048" {
       namespace = "flux-system"
     }
     spec = {
-      interval        = "10m"
-      targetNamespace = "game-2048"
+      interval = "10m"
       sourceRef = {
         kind = "GitRepository"
         name = "flux-system"
@@ -22,12 +21,6 @@ resource "kubernetes_manifest" "flux_kustomization_game_2048" {
       prune   = "true"
       timeout = "1m"
     }
-  }
-}
-
-resource "kubernetes_namespace" "emojivoto" {
-  metadata {
-    name = "emojivoto"
   }
 }
 
@@ -40,13 +33,33 @@ resource "kubernetes_manifest" "flux_kustomization_emojivoto" {
       namespace = "flux-system"
     }
     spec = {
-      interval        = "10m"
-      targetNamespace = "emojivoto"
+      interval = "10m"
       sourceRef = {
         kind = "GitRepository"
         name = "flux-system"
       }
       path    = "./emojivoto-example/kustomize"
+      prune   = "true"
+      timeout = "1m"
+    }
+  }
+}
+
+resource "kubernetes_manifest" "flux_kustomization_kube_prometheus" {
+  manifest = {
+    apiVersion = "kustomize.toolkit.fluxcd.io/v1"
+    kind       = "Kustomization"
+    metadata = {
+      name      = "kube-prometheus-ingress"
+      namespace = "flux-system"
+    }
+    spec = {
+      interval = "10m"
+      sourceRef = {
+        kind      = "GitRepository"
+        name      = "flux-system"
+      }
+      path    = "./kube-prometheus/custom"
       prune   = "true"
       timeout = "1m"
     }
