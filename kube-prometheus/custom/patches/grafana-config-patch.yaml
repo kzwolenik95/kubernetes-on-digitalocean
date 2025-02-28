@@ -5,4 +5,4 @@
     default_timezone = UTC
     [server]
     domain = grafana.kzwolenik.com
-    root_url = https://grafana.kzwolenik.com/
+    root_url = https://grafana.kzwolenik.com
