@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: monitoring
 
 resources:
-  - github.com/prometheus-operator/kube-prometheus/manifests
+  - github.com/prometheus-operator/kube-prometheus/manifests?ref=main
