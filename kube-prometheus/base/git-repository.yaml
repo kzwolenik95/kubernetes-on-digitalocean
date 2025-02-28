@@ -13,4 +13,4 @@ spec:
     !/manifests
     !/kustomization.yaml
   ref:
-    branch: master
+    branch: main
