@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: grafana-ingress
+  namespace: monitoring
   annotations:
     external-dns.alpha.kubernetes.io/hostname: grafana.kzwolenik.com
 spec:
