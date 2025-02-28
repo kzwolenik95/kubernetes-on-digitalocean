@@ -1,0 +1,16 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: kube-prometheus
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  url: https://github.com/prometheus-operator/kube-prometheus.git
+  ignore: |
+    exclude all
+    /*
+    # include deploy dir
+    !/manifests
+    !/kustomization.yaml
+  ref:
+    branch: master
