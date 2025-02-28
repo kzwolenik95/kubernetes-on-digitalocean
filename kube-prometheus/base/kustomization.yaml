@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - kustom.yaml
   - git-repository.yaml
+  - namespace.yaml
