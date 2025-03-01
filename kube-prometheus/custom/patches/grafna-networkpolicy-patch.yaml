@@ -5,12 +5,7 @@ metadata:
   namespace: monitoring
 spec:
   ingress:
-    - from:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-      ports:
-        - port: 3000
-          protocol: TCP
+  - {}
   podSelector:
     matchLabels:
       app.kubernetes.io/component: grafana
