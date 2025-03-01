@@ -4,4 +4,4 @@
     [date_formats]
     default_timezone = UTC
     [server]
-    root_url = http://http://64.226.70.115:32446/
+    root_url = https://grafana.kzwolenik.com

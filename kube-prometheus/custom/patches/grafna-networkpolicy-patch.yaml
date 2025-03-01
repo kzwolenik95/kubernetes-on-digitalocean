@@ -3,11 +3,11 @@
   value:
     from:
       - namespaceSelector:
-        matchLabels:
-          name: kong-namespace
+          matchLabels:
+            name: kong-namespace
       - podSelector:
-        matchLabels:
-          app: kong-ingress-gateway
+          matchLabels:
+            app: kong-ingress-gateway
     ports:
       - port: 3000
         protocol: TCP
