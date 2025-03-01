@@ -9,5 +9,5 @@ spec:
         - ipBlock:
             cidr: 0.0.0.0/0
       ports:
-        - port: 3000
+        - port: 32446
           protocol: TCP
