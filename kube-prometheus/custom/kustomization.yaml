@@ -12,10 +12,9 @@ patches:
       kind: Secret
       name: grafana-config
       namespace: monitoring
-  - path: patches/grafana-service-patch.yaml
+  - path: patches/grafna-networkpolicy-patch.yaml
     target:
       version: v1
-      kind: Service
+      kind: NetworkPolicy
       name: grafana
       namespace: monitoring
-  - path: patches/grafna-networkpolicy-patch.yaml

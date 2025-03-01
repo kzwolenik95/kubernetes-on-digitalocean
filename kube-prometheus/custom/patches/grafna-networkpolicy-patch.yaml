@@ -1,8 +1,13 @@
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: grafana
-  namespace: monitoring
-spec:
-  ingress:
-    - {}
+- op: add
+  path: /spec/ingress/-
+  value:
+    from:
+      - namespaceSelector:
+        matchLabels:
+          name: kong-namespace
+      - podSelector:
+        matchLabels:
+          app: kong-ingress-gateway
+    ports:
+      - port: 3000
+        protocol: TCP
