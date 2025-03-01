@@ -18,3 +18,4 @@ patches:
       kind: Service
       name: grafana
       namespace: monitoring
+  - path: patches/grafna-networkpolicy-patch.yaml
