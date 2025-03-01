@@ -12,3 +12,9 @@ patches:
       kind: Secret
       name: grafana-config
       namespace: monitoring
+  - path: patches/grafana-service-patch.yaml
+    target:
+      version: v1
+      kind: Service
+      name: grafana
+      namespace: monitoring
