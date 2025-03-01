@@ -19,3 +19,8 @@ patches:
       name: grafana
       namespace: monitoring
   - path: patches/grafna-networkpolicy-patch.yaml
+    target:
+      version: v1
+      kind: NetworkPolicy
+      name: grafana
+      namespace: monitoring
