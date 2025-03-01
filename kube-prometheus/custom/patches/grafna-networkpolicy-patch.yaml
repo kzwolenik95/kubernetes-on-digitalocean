@@ -4,11 +4,11 @@
     from:
       - ipBlock:
           cidr: 0.0.0.0/0
-    - ipBlock:
-        cidr: 10.114.0.0/16
-    - ipBlock:
-        cidr: 64.226.70.115/32
-    - ipBlock:
-        cidr: 68.183.209.208/32
-    - ipBlock:
-        cidr: 164.92.182.209/32
+      - ipBlock:
+          cidr: 10.114.0.0/16
+      - ipBlock:
+          cidr: 64.226.70.115/32
+      - ipBlock:
+          cidr: 68.183.209.208/32
+      - ipBlock:
+          cidr: 164.92.182.209/32
