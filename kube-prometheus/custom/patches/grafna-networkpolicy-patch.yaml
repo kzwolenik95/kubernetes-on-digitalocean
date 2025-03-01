@@ -4,7 +4,7 @@
     from:
       - namespaceSelector:
           matchLabels:
-            name: kong-system
+            kubernetes.io/metadata.name: kong-system
       - podSelector:
           matchLabels:
             app: kong-ingress-gateway
