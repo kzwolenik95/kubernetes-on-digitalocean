@@ -2,6 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: kong-ingress-gateway
+  namespace: monitoring
 spec:
   selector:
     matchLabels:
