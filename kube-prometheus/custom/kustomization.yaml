@@ -5,6 +5,7 @@ resources:
   - ../base
   - resources/ingress.yaml
   - resources/kong-exporter.yaml
+  - resources/ip-restriction-plugin.yaml
 
 patches:
   - path: patches/grafana-config-patch.yaml
