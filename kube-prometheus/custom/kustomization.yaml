@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ../base
   - resources/ingress.yaml
+  - resources/kong-exporter.yaml
 
 patches:
   - path: patches/grafana-config-patch.yaml
