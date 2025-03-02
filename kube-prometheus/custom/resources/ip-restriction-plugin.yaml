@@ -1,8 +1,8 @@
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
-  name: ip-restriction
+  name: ip-restriction-admin-ip
 config:
   allow:
-    - your.ip.address.here
+    - 79.117.172.152
 plugin: ip-restriction
