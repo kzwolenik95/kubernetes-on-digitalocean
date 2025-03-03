@@ -4,6 +4,8 @@ metadata:
   name: global-file-log
   annotations:
     kubernetes.io/ingress.class: kong
+  labels:
+    global: "true"
 config:
   path: /tmp/access.log
 plugin: file-log
