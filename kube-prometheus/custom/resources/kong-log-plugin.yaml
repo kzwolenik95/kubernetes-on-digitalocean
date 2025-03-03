@@ -5,5 +5,5 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: kong
 config:
-  path: logs/access2.log
+  path: /tmp/access.log
 plugin: file-log
