@@ -6,6 +6,7 @@ metadata:
   annotations:
     konghq.com/plugins: ip-restriction-admin-ip
     external-dns.alpha.kubernetes.io/hostname: grafana.kzwolenik.com
+    konghq.com/plugins: file-log
 spec:
   ingressClassName: kong
   rules:
