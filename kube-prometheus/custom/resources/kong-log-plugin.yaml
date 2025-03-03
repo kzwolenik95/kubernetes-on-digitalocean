@@ -1,8 +1,8 @@
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
-  name: file-log
+  name: file-log-example
   namespace: kong-system
 config:
-  path: "/kong_prefix/logs/requests.log"
+  path: "/tmp/requests.log"
 plugin: file-log
