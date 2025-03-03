@@ -4,7 +4,6 @@ metadata:
   name: grafana-ingress
   namespace: monitoring
   annotations:
-    konghq.com/plugins: ip-restriction-admin-ip,file-log
     external-dns.alpha.kubernetes.io/hostname: grafana.kzwolenik.com
 spec:
   ingressClassName: kong
