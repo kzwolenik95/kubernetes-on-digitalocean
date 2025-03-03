@@ -4,5 +4,5 @@ metadata:
   name: file-log
   namespace: kong-system
 config:
-  path: /dev/stdout
+  path: "/kong_prefix/logs/requests.log"
 plugin: file-log
