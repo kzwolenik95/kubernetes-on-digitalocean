@@ -2,7 +2,6 @@ apiVersion: configuration.konghq.com/v1
 kind: KongClusterPlugin
 metadata:
   name: global-file-log
-  namespace: kong-system
 config:
   path: /dev/stdout
 plugin: file-log
