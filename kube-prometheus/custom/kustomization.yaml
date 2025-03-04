@@ -10,6 +10,7 @@ resources:
   - resources/kong-log-plugin.yaml
   - resources/kong-system-role.yaml
   - resources/kong-system-rolebinding.yaml
+  - resources/kong-ingress-controller-servicemonitor.yaml
 
 patches:
   - path: patches/grafana-config-patch.yaml
