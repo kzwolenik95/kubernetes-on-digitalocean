@@ -8,6 +8,8 @@ resources:
   - resources/ip-restriction-plugin.yaml
   - resources/kong-ingress-gateway-podmonitor.yaml
   - resources/kong-log-plugin.yaml
+  - resources/kong-system-role.yaml
+  - resources/kong-system-rolebinding.yaml
 
 patches:
   - path: patches/grafana-config-patch.yaml
