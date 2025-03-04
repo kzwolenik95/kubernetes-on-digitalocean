@@ -42,10 +42,22 @@ resource "kubernetes_manifest" "helmrelease_kong_system_kong_ingress" {
       interval = "5m"
       values = {
         controller = {
-          replicaCount = 2
+          replicaCount = 1
         }
         gateway = {
-          replicaCount = 2
+          proxy = {
+            annotations = {
+              "service.beta.kubernetes.io/do-loadbalancer-tls-passthrough"       = "true"
+              "service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol" = "true"
+              "service.beta.kubernetes.io/do-loadbalancer-protocol"              = "https"
+            }
+          }
+          env = {
+            trusted_ips    = "0.0.0.0/0,::/0"
+            real_ip_header = "proxy_protocol"
+            proxy_listen    = "0.0.0.0:8000 proxy_protocol, 0.0.0.0:8443 ssl proxy_protocol"
+          }
+          replicaCount = 1
           certificates = {
             enabled = true
             proxy = {
