@@ -4,6 +4,9 @@ metadata:
   name: kong-ingress-gateway
   namespace: monitoring
 spec:
+  namespaceSelector:
+    matchNames:
+      - kong-system
   selector:
     matchLabels:
       app: kong-ingress-gateway
