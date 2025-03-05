@@ -13,13 +13,13 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
+  build:
     runs-on: ubuntu-latest
     env:
       DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
     defaults:
       run:
-        working-directory: terraform-infra
+        working-directory: game-2048
     steps:
       - name: Checkout
         uses: actions/checkout@v4
