@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - game-2048/*
+      - "game-2048/**"
 
 permissions:
   id-token: write
