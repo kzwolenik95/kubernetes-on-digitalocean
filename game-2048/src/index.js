@@ -10,3 +10,4 @@ const game = new Game({
   gameContainer: gameContainerDiv,
   keepPlaying: true,
 });
+
