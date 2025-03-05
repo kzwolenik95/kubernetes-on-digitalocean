@@ -1,0 +1,30 @@
+name: Build game
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - game-2048/*
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    env:
+      DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
+    defaults:
+      run:
+        working-directory: terraform-infra
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            game-2048
+      - name: Check tree
+        run: tree
