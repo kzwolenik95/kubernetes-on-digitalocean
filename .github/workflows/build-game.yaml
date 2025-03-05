@@ -26,5 +26,21 @@ jobs:
         with:
           sparse-checkout: |
             game-2048
-      - name: Check tree
-        run: tree
+      - name: Login to DigitalOcean Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: registry.digitalocean.com
+          username: ${{ vars.DIGITALOCEAN_USERNAME }}
+          password: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v6.13.0
+        with:
+          context: "game-2048"
+          push: true
+          tags: "registry.digitalocean.com/kubernetes-kzwolenik95/2048-game"
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
