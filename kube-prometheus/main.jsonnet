@@ -71,7 +71,7 @@ local kp =
                 {
                   namespaceSelector: {
                     matchLabels: {
-                      'app.kubernetes.io/name': 'kong-system',
+                      'kubernetes.io/metadata.name': 'kong-system',
                     },
                   },
                   podSelector: {
