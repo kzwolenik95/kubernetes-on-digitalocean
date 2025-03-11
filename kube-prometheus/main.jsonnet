@@ -50,7 +50,9 @@ local kp =
                 backend: {
                   service: {
                     name: $.grafana.service.metadata.name,
-                    port: 'http',
+                    port: {
+                      name: 'http',
+                    },
                   },
                 },
               }],

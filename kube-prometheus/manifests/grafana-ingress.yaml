@@ -15,5 +15,6 @@ spec:
       - backend:
           service:
             name: grafana
-            port: http
+            port:
+              name: http
         pathType: ImplementationSpecific
