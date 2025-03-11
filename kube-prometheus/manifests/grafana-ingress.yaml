@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: grafana.kzwolenik.com
+    konghq.com/plugins: ip-restriction-admin-ip,global-file-log
+  name: grafana
+  namespace: monitoring
+spec:
+  ingressClassName: kong
+  rules:
+  - host: grafana.kzwolenik.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: grafana
+            port: http
+        pathType: ImplementationSpecific

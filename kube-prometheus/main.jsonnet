@@ -1,3 +1,5 @@
+local domain = 'kzwolenik.com';
+
 local kp =
   (import 'kube-prometheus/main.libsonnet') +
   // Uncomment the following imports to enable its patches
@@ -16,7 +18,72 @@ local kp =
       prometheus+: {
         namespaces+: ['kong-system'],
       },
+      grafana+:: {
+        config+: {
+          sections+: {
+            server+: {
+              root_url: 'https://grafana.' + domain,
+            },
+          },
+        },
+      },
     },
+    ingress+:: {
+      grafana: {
+        apiVersion: 'networking.k8s.io/v1',
+        kind: 'Ingress',
+        metadata: {
+          name: $.grafana.service.metadata.name,
+          namespace: $.grafana.service.metadata.namespace,
+          annotations: {
+            'konghq.com/plugins': 'ip-restriction-admin-ip,global-file-log',
+            'external-dns.alpha.kubernetes.io/hostname': 'grafana.' + domain,
+          },
+        },
+        spec: {
+          ingressClassName: 'kong',
+          rules: [{
+            host: 'grafana.' + domain,
+            http: {
+              paths: [{
+                pathType: 'ImplementationSpecific',
+                backend: {
+                  service: {
+                    name: $.grafana.service.metadata.name,
+                    port: 'http',
+                  },
+                },
+              }],
+            },
+          }],
+        },
+      },
+    },
+    grafana+:: {
+      networkPolicy+: {
+        spec+: {
+          ingress: [
+            super.ingress[0] {
+              from+: [
+                {
+                  namespaceSelector: {
+                    matchLabels: {
+                      'app.kubernetes.io/name': 'kong-system',
+                    },
+                  },
+                  podSelector: {
+                    matchLabels: {
+                      app: 'kong-ingress-gateway',
+                    },
+                  },
+                },
+              ],
+            },
+          ] + super.ingress[1:],
+        },
+      },
+    },
+
   };
 
 { 'setup/0namespace-namespace': kp.kubePrometheus.namespace } +
@@ -38,3 +105,4 @@ local kp =
 { ['node-exporter-' + name]: kp.nodeExporter[name] for name in std.objectFields(kp.nodeExporter) } +
 { ['prometheus-' + name]: kp.prometheus[name] for name in std.objectFields(kp.prometheus) } +
 { ['prometheus-adapter-' + name]: kp.prometheusAdapter[name] for name in std.objectFields(kp.prometheusAdapter) }
+{ [name + '-ingress']: kp.ingress[name] for name in std.objectFields(kp.ingress) }

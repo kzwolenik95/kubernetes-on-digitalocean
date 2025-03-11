@@ -16,6 +16,12 @@ spec:
     - podSelector:
         matchLabels:
           app.kubernetes.io/name: prometheus
+    - namespaceSelector:
+        matchLabels:
+          app.kubernetes.io/name: kong-system
+      podSelector:
+        matchLabels:
+          app: kong-ingress-gateway
     ports:
     - port: 3000
       protocol: TCP
