@@ -17,4 +17,5 @@ spec:
             name: grafana
             port:
               name: http
+        path: /
         pathType: ImplementationSpecific

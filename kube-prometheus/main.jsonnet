@@ -46,6 +46,7 @@ local kp =
             host: 'grafana.' + domain,
             http: {
               paths: [{
+                path: '/',
                 pathType: 'ImplementationSpecific',
                 backend: {
                   service: {
