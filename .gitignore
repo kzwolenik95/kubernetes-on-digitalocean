@@ -175,3 +175,6 @@ dist
 
 # envrc
 .envrc
+
+# vendor folder
+kube-prometheus/vendor/*
