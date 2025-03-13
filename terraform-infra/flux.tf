@@ -59,7 +59,7 @@ resource "kubernetes_manifest" "flux_kustomization_kube_prometheus" {
         kind      = "GitRepository"
         name      = "flux-system"
       }
-      path    = "./kube-prometheus/custom"
+      path    = "./kube-prometheus/manifests"
       prune   = "true"
       timeout = "1m"
     }

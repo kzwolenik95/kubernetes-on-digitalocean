@@ -43,6 +43,9 @@ resource "kubernetes_manifest" "helmrelease_kong_system_kong_ingress" {
       values = {
         controller = {
           replicaCount = 1
+          serviceMonitor = {
+            enabled = true
+          }
         }
         gateway = {
           proxy = {
@@ -55,7 +58,7 @@ resource "kubernetes_manifest" "helmrelease_kong_system_kong_ingress" {
           env = {
             trusted_ips    = "0.0.0.0/0,::/0"
             real_ip_header = "proxy_protocol"
-            proxy_listen    = "0.0.0.0:8000 proxy_protocol, 0.0.0.0:8443 ssl proxy_protocol"
+            proxy_listen   = "0.0.0.0:8000 proxy_protocol, 0.0.0.0:8443 ssl proxy_protocol"
           }
           replicaCount = 1
           certificates = {
@@ -82,6 +85,27 @@ resource "kubernetes_manifest" "helmrelease_kong_system_kong_ingress" {
           }
         }
       }
+    }
+  }
+}
+
+resource "kubernetes_manifest" "flux_kustomization_kong" {
+  manifest = {
+    apiVersion = "kustomize.toolkit.fluxcd.io/v1"
+    kind       = "Kustomization"
+    metadata = {
+      name      = "kong-kustomization"
+      namespace = "flux-system"
+    }
+    spec = {
+      interval = "10m"
+      sourceRef = {
+        kind = "GitRepository"
+        name = "flux-system"
+      }
+      path    = "./kong"
+      prune   = "true"
+      timeout = "1m"
     }
   }
 }
