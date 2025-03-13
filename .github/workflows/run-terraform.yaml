@@ -30,6 +30,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
