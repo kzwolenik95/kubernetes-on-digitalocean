@@ -56,10 +56,31 @@ resource "kubernetes_manifest" "flux_kustomization_kube_prometheus" {
     spec = {
       interval = "10m"
       sourceRef = {
-        kind      = "GitRepository"
-        name      = "flux-system"
+        kind = "GitRepository"
+        name = "flux-system"
       }
       path    = "./kube-prometheus/manifests"
+      prune   = "true"
+      timeout = "1m"
+    }
+  }
+}
+
+resource "kubernetes_manifest" "flux_kustomization_vault" {
+  manifest = {
+    apiVersion = "kustomize.toolkit.fluxcd.io/v1"
+    kind       = "Kustomization"
+    metadata = {
+      name      = "hashicorp-vault"
+      namespace = "flux-system"
+    }
+    spec = {
+      interval = "10m"
+      sourceRef = {
+        kind = "GitRepository"
+        name = "flux-system"
+      }
+      path    = "./vault"
       prune   = "true"
       timeout = "1m"
     }
