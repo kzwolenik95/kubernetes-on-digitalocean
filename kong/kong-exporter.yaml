@@ -12,5 +12,5 @@ config:
   latency_metrics: true
   bandwidth_metrics: true
   upstream_health_metrics: true
-   upstream_health_metrics: true
+  upstream_health_metrics: true
 plugin: prometheus
