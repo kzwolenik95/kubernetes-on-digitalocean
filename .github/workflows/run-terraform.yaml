@@ -13,10 +13,11 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  terraform:
     runs-on: ubuntu-latest
     env:
       TF_FORCE_LOCAL_BACKEND: 1
+      TF_TOKEN_app_terraform_io: ${{ secrets.HCP_TERRAFORM_TOKEN }}
       TF_VAR_cloudflare_token: ${{ secrets.CLOUDFLARE_TOKEN }}
       TF_VAR_admin_ip_address: ${{ vars.ADMIN_IP }}
       TF_VAR_do_token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
