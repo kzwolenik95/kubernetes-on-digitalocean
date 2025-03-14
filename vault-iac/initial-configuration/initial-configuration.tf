@@ -1,7 +1,7 @@
 terraform {
   backend "kubernetes" {
     secret_suffix = "terraform-init-setup-state"
-    namespace     = "hashicorp-vault"
+    namespace     = "default"
   }
   required_providers {
     vault = {
