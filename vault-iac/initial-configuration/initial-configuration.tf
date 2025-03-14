@@ -1,7 +1,7 @@
 terraform {
   backend "kubernetes" {
     secret_suffix = "terraform-init-setup-state"
-    namespace     = "default"
+    namespace     = "hashicorp-vault"
   }
   required_providers {
     vault = {
@@ -43,6 +43,13 @@ resource "kubernetes_role" "terraform-vault-role" {
     api_groups = ["batch"]
     resources  = ["jobs"]
     verbs      = ["create"]
+  }
+
+  rule {
+    api_groups     = [""]
+    resources      = ["secrets"]
+    resource_names = ["tfstate-default-terraform"]
+    verbs          = ["get", "create", "update", "patch"]
   }
 }
 

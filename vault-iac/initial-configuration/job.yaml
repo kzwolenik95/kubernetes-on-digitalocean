@@ -22,7 +22,7 @@ spec:
               git clean -fd &&
               rm -rf .git &&
               mv vault-iac/initial-configuration/*.tf . &&
-              rmdir vault-iac
+              rm -r vault-iac
           volumeMounts:
             - name: terraform
               mountPath: /terraform
