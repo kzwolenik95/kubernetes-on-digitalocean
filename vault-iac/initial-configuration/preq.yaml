@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: terraform-init-setup
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: terraform-init-setup-rb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: terraform-init-setup
+    namespace: default
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: terraform-apply
+spec:
+  ttlSecondsAfterFinished: 3600
+  template:
+    spec:
+      serviceAccountName: terraform-init-setup
+      initContainers:
+        - name: git-cloner
+          image: alpine/git
+          command:
+            - sh
+            - -c
+            - |
+              git clone --filter=blob:none --depth 1 --sparse https://github.com/kzwolenik95/kubernetes-on-digitalocean /terraform &&
+              cd /terraform &&
+              git sparse-checkout init --no-cone &&
+              git sparse-checkout set '*.tf' &&
+              git clean -fd &&
+              rm -rf .git &&
+              mv vault-iac/*.tf . &&
+              rmdir vault-iac
+          volumeMounts:
+            - name: terraform
+              mountPath: /terraform
+        - name: init
+          image: "hashicorp/terraform"
+          command: ["terraform", "-chdir=/terraform", "init"]
+          volumeMounts:
+            - name: terraform
+              mountPath: /terraform
+      containers:
+        - name: apply
+          image: "hashicorp/terraform"
+          env:
+            - name: TF_VAR_token
+              value: $TF_VAR_token
+          command:
+            ["terraform", "-chdir=/terraform", "destroy", "-auto-approve"]
+          volumeMounts:
+            - name: terraform
+              mountPath: /terraform
+      volumes:
+        - name: terraform
+          emptyDir: {}
+      restartPolicy: Never

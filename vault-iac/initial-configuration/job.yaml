@@ -18,9 +18,11 @@ spec:
               git clone --filter=blob:none --depth 1 --sparse https://github.com/kzwolenik95/kubernetes-on-digitalocean /terraform &&
               cd /terraform &&
               git sparse-checkout init --no-cone &&
-              git sparse-checkout set 'vault-iac/*.tf' &&
+              git sparse-checkout set 'vault-iac/initial-configuration/*.tf' &&
               git clean -fd &&
-              rm -rf .git
+              rm -rf .git &&
+              mv vault-iac/initial-configuration/*.tf . &&
+              rmdir vault-iac
           volumeMounts:
             - name: terraform
               mountPath: /terraform
@@ -33,7 +35,10 @@ spec:
       containers:
         - name: apply
           image: "hashicorp/terraform"
-          command: ["terraform", "-chdir=/terraform", "apply", "-auto-approve"]
+          env:
+            - name: TF_VAR_token
+              value: $TF_VAR_token
+          command: ["terraform", "-chdir=/terraform", "destroy", "-auto-approve"]
           volumeMounts:
             - name: terraform
               mountPath: /terraform
