@@ -75,8 +75,6 @@ resource "vault_auth_backend" "kubernetes" {
 }
 
 resource "vault_kubernetes_auth_backend_config" "example" {
-  backend            = vault_auth_backend.kubernetes.path
-  kubernetes_host    = "https://kubernetes.default.svc"
-  kubernetes_ca_cert = file("/var/run/secrets/kubernetes.io/serviceaccount/ca.crt")
-  token_reviewer_jwt = file("/var/run/secrets/kubernetes.io/serviceaccount/token")
+  backend         = vault_auth_backend.kubernetes.path
+  kubernetes_host = "https://kubernetes.default.svc"
 }
