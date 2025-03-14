@@ -38,7 +38,8 @@ spec:
           env:
             - name: TF_VAR_token
               value: $TF_VAR_token
-          command: ["terraform", "-chdir=/terraform", "destroy", "-auto-approve"]
+          command:
+            ["terraform", "-chdir=/terraform", "apply", "-auto-approve"]
           volumeMounts:
             - name: terraform
               mountPath: /terraform
