@@ -1,0 +1,37 @@
+name: Run terraform vault
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "vault-iac/*.tf"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: vault-iac
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: "vault-iac"
+          sparse-checkout-cone-mode: "false"
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
+
+      - name: Fetch kubeconfig
+        run: doctl kubernetes cluster kubeconfig save 38a490d7-ee71-41a5-86de-c5fe0e578198
+
+      - name: Run kubectl create command
+        run: kubectl create -f job.yaml

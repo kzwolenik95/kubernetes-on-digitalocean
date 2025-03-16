@@ -2,12 +2,12 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: terraform-apply
+  generateName: terraform-apply-
 spec:
   ttlSecondsAfterFinished: 3600
   template:
     spec:
-      serviceAccountName: terraform-init-setup # Use a dedicated service account
+      serviceAccountName: terraform-vault
       initContainers:
         - name: git-cloner
           image: alpine/git
@@ -18,10 +18,10 @@ spec:
               git clone --filter=blob:none --depth 1 --sparse https://github.com/kzwolenik95/kubernetes-on-digitalocean /terraform &&
               cd /terraform &&
               git sparse-checkout init --no-cone &&
-              git sparse-checkout set 'vault-iac/initial-configuration/*.tf' &&
+              git sparse-checkout set 'vault-iac/*.tf' &&
               git clean -fd &&
               rm -rf .git &&
-              mv vault-iac/initial-configuration/*.tf . &&
+              mv vault-iac/*.tf . &&
               rm -r vault-iac
           volumeMounts:
             - name: terraform
@@ -35,11 +35,7 @@ spec:
       containers:
         - name: apply
           image: "hashicorp/terraform"
-          env:
-            - name: TF_VAR_token
-              value: $TF_VAR_token
-          command:
-            ["terraform", "-chdir=/terraform", "delete", "-auto-approve"]
+          command: ["terraform", "-chdir=/terraform", "delete", "-auto-approve"]
           volumeMounts:
             - name: terraform
               mountPath: /terraform
