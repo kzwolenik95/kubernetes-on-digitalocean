@@ -36,7 +36,7 @@ spec:
       containers:
         - name: apply
           image: "hashicorp/terraform"
-          command: ["terraform", "-chdir=/terraform", "delete", "-auto-approve"]
+          command: ["terraform", "-chdir=/terraform", "apply", "-auto-approve"]
           volumeMounts:
             - name: terraform
               mountPath: /terraform

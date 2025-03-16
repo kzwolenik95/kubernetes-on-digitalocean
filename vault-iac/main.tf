@@ -49,4 +49,3 @@ resource "vault_mount" "demo_app" {
     version = "2"
   }
 }
-

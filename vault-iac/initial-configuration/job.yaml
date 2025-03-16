@@ -39,7 +39,7 @@ spec:
             - name: TF_VAR_token
               value: $TF_VAR_token
           command:
-            ["terraform", "-chdir=/terraform", "delete", "-auto-approve"]
+            ["terraform", "-chdir=/terraform", "apply", "-auto-approve"]
           volumeMounts:
             - name: terraform
               mountPath: /terraform
