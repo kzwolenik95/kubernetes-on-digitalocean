@@ -86,3 +86,45 @@ resource "kubernetes_manifest" "flux_kustomization_vault" {
     }
   }
 }
+
+resource "kubernetes_manifest" "flux_kustomization_cnpg" {
+  manifest = {
+    apiVersion = "kustomize.toolkit.fluxcd.io/v1"
+    kind       = "Kustomization"
+    metadata = {
+      name      = "cnpg"
+      namespace = "flux-system"
+    }
+    spec = {
+      interval = "10m"
+      sourceRef = {
+        kind = "GitRepository"
+        name = "flux-system"
+      }
+      path    = "./postgresql/operator"
+      prune   = "true"
+      timeout = "1m"
+    }
+  }
+}
+
+resource "kubernetes_manifest" "flux_kustomization_postgres" {
+  manifest = {
+    apiVersion = "kustomize.toolkit.fluxcd.io/v1"
+    kind       = "Kustomization"
+    metadata = {
+      name      = "postgres"
+      namespace = "flux-system"
+    }
+    spec = {
+      interval = "10m"
+      sourceRef = {
+        kind = "GitRepository"
+        name = "flux-system"
+      }
+      path    = "./postgresql/dbs/kustomization.yaml"
+      prune   = "true"
+      timeout = "1m"
+    }
+  }
+}
