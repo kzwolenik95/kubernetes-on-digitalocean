@@ -122,7 +122,7 @@ resource "kubernetes_manifest" "flux_kustomization_postgres" {
         kind = "GitRepository"
         name = "flux-system"
       }
-      path    = "./postgresql/dbs/kustomization.yaml"
+      path    = "./postgresql/dbs"
       prune   = "true"
       timeout = "1m"
     }
