@@ -3,12 +3,12 @@ resource "flux_bootstrap_git" "this" {
   path               = "clusters/my-cluster"
 }
 
-resource "kubernetes_manifest" "flux_kustomization_game_2048" {
+resource "kubernetes_manifest" "flux_kustomizations" {
   manifest = {
     apiVersion = "kustomize.toolkit.fluxcd.io/v1"
     kind       = "Kustomization"
     metadata = {
-      name      = "game-2048"
+      name      = "flux_kustomizations"
       namespace = "flux-system"
     }
     spec = {
@@ -17,112 +17,7 @@ resource "kubernetes_manifest" "flux_kustomization_game_2048" {
         kind = "GitRepository"
         name = "flux-system"
       }
-      path    = "./game-2048/kustomize"
-      prune   = "true"
-      timeout = "1m"
-    }
-  }
-}
-
-resource "kubernetes_manifest" "flux_kustomization_emojivoto" {
-  manifest = {
-    apiVersion = "kustomize.toolkit.fluxcd.io/v1"
-    kind       = "Kustomization"
-    metadata = {
-      name      = "emojivoto"
-      namespace = "flux-system"
-    }
-    spec = {
-      interval = "10m"
-      sourceRef = {
-        kind = "GitRepository"
-        name = "flux-system"
-      }
-      path    = "./emojivoto-example/kustomize"
-      prune   = "true"
-      timeout = "1m"
-    }
-  }
-}
-
-resource "kubernetes_manifest" "flux_kustomization_kube_prometheus" {
-  manifest = {
-    apiVersion = "kustomize.toolkit.fluxcd.io/v1"
-    kind       = "Kustomization"
-    metadata = {
-      name      = "kube-prometheus-ingress"
-      namespace = "flux-system"
-    }
-    spec = {
-      interval = "10m"
-      sourceRef = {
-        kind = "GitRepository"
-        name = "flux-system"
-      }
-      path    = "./kube-prometheus/manifests"
-      prune   = "true"
-      timeout = "1m"
-    }
-  }
-}
-
-resource "kubernetes_manifest" "flux_kustomization_vault" {
-  manifest = {
-    apiVersion = "kustomize.toolkit.fluxcd.io/v1"
-    kind       = "Kustomization"
-    metadata = {
-      name      = "hashicorp-vault"
-      namespace = "flux-system"
-    }
-    spec = {
-      interval = "10m"
-      sourceRef = {
-        kind = "GitRepository"
-        name = "flux-system"
-      }
-      path    = "./vault"
-      prune   = "true"
-      timeout = "1m"
-    }
-  }
-}
-
-resource "kubernetes_manifest" "flux_kustomization_cnpg" {
-  manifest = {
-    apiVersion = "kustomize.toolkit.fluxcd.io/v1"
-    kind       = "Kustomization"
-    metadata = {
-      name      = "cnpg"
-      namespace = "flux-system"
-    }
-    spec = {
-      interval = "10m"
-      sourceRef = {
-        kind = "GitRepository"
-        name = "flux-system"
-      }
-      path    = "./postgresql/operator"
-      prune   = "true"
-      timeout = "1m"
-    }
-  }
-}
-
-resource "kubernetes_manifest" "flux_kustomization_postgres" {
-  manifest = {
-    apiVersion = "kustomize.toolkit.fluxcd.io/v1"
-    kind       = "Kustomization"
-    metadata = {
-      name      = "postgres"
-      namespace = "flux-system"
-    }
-    spec = {
-      interval = "10m"
-      sourceRef = {
-        kind = "GitRepository"
-        name = "flux-system"
-      }
-      path    = "./postgresql/dbs"
+      path    = "./flux"
       prune   = "true"
       timeout = "1m"
     }
