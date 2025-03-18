@@ -8,7 +8,7 @@ resource "kubernetes_manifest" "flux_kustomizations" {
     apiVersion = "kustomize.toolkit.fluxcd.io/v1"
     kind       = "Kustomization"
     metadata = {
-      name      = "flux_kustomizations"
+      name      = "flux-kustomizations"
       namespace = "flux-system"
     }
     spec = {
