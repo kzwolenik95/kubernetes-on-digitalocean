@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: grafana.kzwolenik.com
+    konghq.com/plugins: ip-restriction-admin-ip,global-file-log
   name: grafana
   namespace: monitoring
 spec:

@@ -36,7 +36,7 @@ local kp =
           name: $.grafana.service.metadata.name,
           namespace: $.grafana.service.metadata.namespace,
           annotations: {
-            // 'konghq.com/plugins': 'ip-restriction-admin-ip,global-file-log',
+            'konghq.com/plugins': 'ip-restriction-admin-ip,global-file-log',
             'external-dns.alpha.kubernetes.io/hostname': 'grafana.' + domain,
           },
         },
