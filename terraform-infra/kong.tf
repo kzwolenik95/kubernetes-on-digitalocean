@@ -42,7 +42,7 @@ resource "kubernetes_manifest" "helmrelease_kong_system_kong_ingress" {
       interval = "5m"
       values = {
         controller = {
-          replicaCount = 1
+          replicaCount = 2
           serviceMonitor = {
             enabled = true
           }
@@ -60,7 +60,7 @@ resource "kubernetes_manifest" "helmrelease_kong_system_kong_ingress" {
             real_ip_header = "proxy_protocol"
             proxy_listen   = "0.0.0.0:8000 proxy_protocol, 0.0.0.0:8443 ssl proxy_protocol"
           }
-          replicaCount = 1
+          replicaCount = 2
           certificates = {
             enabled = true
             proxy = {
